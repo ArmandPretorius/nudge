@@ -1,29 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
+             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:background="#0099cc"
+             android:background="#1C1C1E"
              tools:context=".FullscreenActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
-    <TextView android:id="@+id/fullscreen_content"
+    <FrameLayout
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:keepScreenOn="true"
-              android:textColor="#33b5e5"
+              android:textColor="#F0F0F0"
               android:textStyle="bold"
               android:textSize="50sp"
-              android:gravity="center"
-              android:text="@string/dummy_content"/>
+              android:gravity="center">
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="@string/nudges"
+                  android:textSize="36sp"
+                  android:textColor="#f0f0f0"
+                  android:layout_margin="30dp"/>
+        <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true" tools:srcCompat="@tools:sample/avatars"
+                android:id="@+id/floatingActionButton" app:fabSize="normal" android:src="@drawable/ic_add"
+                android:layout_gravity="top|end" android:layout_margin="30dp" android:focusable="true"
+                app:backgroundTint="#C1C1C1"/>
+
+    </FrameLayout>
+
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
-    <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:fitsSystemWindows="true">
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_marginTop="150dp">
+
+        <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_margin="30dp" android:padding="20dp">
+            <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/checkBox" tools:text="Your Nudge"/>
+        </android.support.v7.widget.CardView>
+    </FrameLayout>
+    <FrameLayout
+            android:id="@+id/fullscreen_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true">
 
         <LinearLayout android:id="@+id/fullscreen_content_controls"
                       style="?metaButtonBarStyle"
@@ -34,12 +64,6 @@
                       android:orientation="horizontal"
                       tools:ignore="UselessParent">
 
-            <Button android:id="@+id/dummy_button"
-                    style="?metaButtonBarButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/dummy_button"/>
 
         </LinearLayout>
     </FrameLayout>
