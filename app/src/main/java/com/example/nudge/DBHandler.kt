@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.support.design.widget.Snackbar
 import com.example.nudge.Model.ToDoItem
 
 class DBHandler(val context: Context): SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
@@ -49,6 +50,7 @@ class DBHandler(val context: Context): SQLiteOpenHelper(context, DB_NAME, null, 
     fun deleteToDoItem(itemId : Long){
         val db = writableDatabase
         db.delete(TABLE_TODO_ITEM,"$COL_ID=?" , arrayOf(itemId.toString()))
+
     }
 
     fun getToDoItems(todoId: Long): MutableList<ToDoItem> {

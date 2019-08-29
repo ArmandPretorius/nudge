@@ -8,6 +8,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.support.constraint.ConstraintSet
 
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.CardView
@@ -19,12 +20,16 @@ import android.webkit.ConsoleMessage
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 
 import com.example.nudge.Model.ToDoItem
 import java.util.*
 
 import kotlinx.android.synthetic.main.activity_fullscreen.*
 import java.io.Console
+import android.widget.LinearLayout
+
+
 
 class FullscreenActivity : AppCompatActivity() {
     private val mHideHandler = Handler()
@@ -115,7 +120,7 @@ class FullscreenActivity : AppCompatActivity() {
 
 
         touchHelper =
-            ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, 0) {
+            ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
                 override fun onMove(
                     p0: RecyclerView,
                     p1: RecyclerView.ViewHolder,
@@ -129,7 +134,14 @@ class FullscreenActivity : AppCompatActivity() {
                 }
 
                 override fun onSwiped(p0: RecyclerView.ViewHolder, p1: Int) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    val sourcePosition = p0.adapterPosition
+
+                    adapter?.notifyItemRemoved(sourcePosition)
+
+                    dbHandler?.deleteToDoItem(sourcePosition.toLong())
+
+
+
                 }
 
             })
@@ -137,29 +149,29 @@ class FullscreenActivity : AppCompatActivity() {
         touchHelper?.attachToRecyclerView(rv_item)
     }
 
-    fun updateItem(item: ToDoItem) {
-        val dialog = AlertDialog.Builder(this)
-        dialog.setTitle("Update ToDo Item")
-        val view = layoutInflater.inflate(R.layout.dialog_dashboard, null)
-        val toDoName = view.findViewById<EditText>(R.id.ev_todo)
-        toDoName.setText(item.itemName)
-        dialog.setView(view)
-        dialog.setPositiveButton("Update") { _: DialogInterface, _: Int ->
-            if (toDoName.text.isNotEmpty()) {
-                item.itemName = toDoName.text.toString()
-                item.toDoId = todoId
-                item.isCompleted = false
-                dbHandler.updateToDoItem(item)
-                refreshList()
-            }
-        }
-        dialog.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
-
-        }
-        dialog.show()
-        mVisible = true
-        toggle()
-    }
+//    fun updateItem(item: ToDoItem) {
+//        val dialog = AlertDialog.Builder(this)
+//        dialog.setTitle("Update ToDo Item")
+//        val view = layoutInflater.inflate(R.layout.dialog_dashboard, null)
+//        val toDoName = view.findViewById<EditText>(R.id.ev_todo)
+//        toDoName.setText(item.itemName)
+//        dialog.setView(view)
+//        dialog.setPositiveButton("Update") { _: DialogInterface, _: Int ->
+//            if (toDoName.text.isNotEmpty()) {
+//                item.itemName = toDoName.text.toString()
+//                item.toDoId = todoId
+//                item.isCompleted = false
+//                dbHandler.updateToDoItem(item)
+//                refreshList()
+//            }
+//        }
+//        dialog.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
+//
+//        }
+//        dialog.show()
+//        mVisible = true
+//        toggle()
+//    }
 
     override fun onResume() {
         refreshList()
@@ -184,29 +196,58 @@ class FullscreenActivity : AppCompatActivity() {
 
         @SuppressLint("ClickableViewAccessibility")
         override fun onBindViewHolder(holder: ViewHolder, p1: Int) {
+
+            //Sets text to database list
             holder.itemName.text = list[p1].itemName
-            holder.itemName.isChecked = list[p1].isCompleted
-            holder.itemName.setOnClickListener {
+            holder.itemNameUnchecked.text = list[p1].itemName
+           // holder.itemName.isChecked = list[p1].isCompleted
+
+            //checks checked to set styling
+            if(list[p1].isCompleted === true){
+                holder.checkMark.visibility = View.VISIBLE
+                holder.itemNameUnchecked.visibility = View.GONE
+                holder.checkedIndication.layoutParams.width = 60
+            } else {
+                holder.checkMark.visibility = View.INVISIBLE
+                holder.checkedIndication.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+                holder.itemNameUnchecked.visibility = View.VISIBLE
+            }
+
+            //MARK AS CHECkED
+            holder.move.setOnClickListener {
                 list[p1].isCompleted = !list[p1].isCompleted
                 activity.dbHandler.updateToDoItem(list[p1])
-            }
-//            holder.delete.setOnClickListener {
-//                val dialog = AlertDialog.Builder(activity)
-//                dialog.setTitle("Are you sure")
-//                dialog.setMessage("Do you want to delete this item ?")
-//                dialog.setPositiveButton("Continue") { _: DialogInterface, _: Int ->
-//                    activity.dbHandler.deleteToDoItem(list[p1].id)
-//                    activity.refreshList()
-//                }
-//                dialog.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
-//
-//                }
-//                dialog.show()
-//            }
-//            holder.edit.setOnClickListener {
-//                activity.updateItem(list[p1])
-//            }
 
+                //checks checked to set styling
+                if(list[p1].isCompleted === true){
+                    holder.checkMark.visibility = View.VISIBLE
+                    holder.itemNameUnchecked.visibility = View.GONE
+                    holder.checkedIndication.layoutParams.width = 60
+                } else {
+                    holder.checkMark.visibility = View.INVISIBLE
+                    holder.itemNameUnchecked.visibility = View.VISIBLE
+                    holder.checkedIndication.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+                }
+            }
+
+
+            //DELETES ITEM
+
+          holder.delete.setOnTouchListener { v, event ->
+              if(event.actionMasked == MotionEvent.ACTION_MOVE){
+                  activity.touchHelper?.startSwipe(holder)
+                      activity.dbHandler.deleteToDoItem(list[p1].id)
+                    //  activity.refreshList()
+              }
+              false
+            }
+
+
+////            holder.edit.setOnClickListener {
+////                activity.updateItem(list[p1])
+////            }
+
+            //MOVES ITEM
             holder.move.setOnTouchListener { v, event ->
                 if(event.actionMasked== MotionEvent.ACTION_DOWN){
                     activity.touchHelper?.startDrag(holder)
@@ -216,9 +257,12 @@ class FullscreenActivity : AppCompatActivity() {
         }
 
         class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-            val itemName: CheckBox = v.findViewById(R.id.cb_item)
+            val itemName: TextView = v.findViewById(R.id.cb_item)
+            val checkedIndication: CardView = v.findViewById(R.id.checked_indication_background)
+            val checkMark: ImageView = v.findViewById(R.id.check_mark)
+            val itemNameUnchecked: TextView = v.findViewById(R.id.cb_item_unchecked)
         //    val edit: ImageView = v.findViewById(R.id.iv_edit)
-        //    val delete: ImageView = v.findViewById(R.id.iv_delete)
+            val delete: CardView = v.findViewById(R.id.cb_background)
             val move: CardView = v.findViewById(R.id.cb_background)
         }
     }
