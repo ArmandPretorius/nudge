@@ -1,20 +1,10 @@
 <!--Nudge README.MD-->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
-
-<!-- PROJECT LOGO -->
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://github.com/ArmandPretorius/nudge">
-    <img src="nudges_logo.png" alt="Logo" width="80" height="80">
+    <img src="nudges_logo.png" alt="Logo" height="80">
   </a>
 
   <h3 align="center">Nudge</h3>
@@ -49,11 +39,12 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/ArmandPretorius/nudge)
+
+<img src="nudge_screenshot.png" alt="Logo" width="180">
 
 Nudge is a Android to-do list application where you can create a simple list of anything you want to remember. Easily reorder the list, mark items as finished and delete items.
 
-This Project is for my Term 3 elective, Native Android Development 303 for which we were tasked to create an application that can enhance productivity.
+This Project is for my Term 3 elective, Native Android Development 303, for which we were tasked to create an application that can enhance productivity.
 
 ### Built With
 This Android application was build using:
@@ -100,7 +91,7 @@ The application uses [SQLite](https://www.sqlite.org/index.html) to store the it
 <!-- CONTACT -->
 ## Contact
 
-Your Name - 170045@virtualwindow.co.za
+Armand Pretorius - 170045@virtualwindow.co.za
 
 Project Link: [https://github.com/ArmandPretorius/nudge](https://github.com/ArmandPretorius/nudge)
 
@@ -111,17 +102,4 @@ Project Link: [https://github.com/ArmandPretorius/nudge](https://github.com/Arma
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/ArmandPretorius/nudge.svg?style=flat-square
-[contributors-url]: https://github.com/ArmandPretorius/nudge/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/ArmandPretorius/nudge.svg?style=flat-square
-[forks-url]: https://github.com/ArmandPretorius/nudge/network/members
-[stars-shield]: https://img.shields.io/github/stars/ArmandPretorius/nudge.svg?style=flat-square
-[stars-url]: https://github.com/ArmandPretorius/nudge/stargazers
-[issues-shield]: https://img.shields.io/github/issues/ArmandPretorius/nudge.svg?style=flat-square
-[issues-url]: https://github.com/ArmandPretorius/nudge/issues
-[license-shield]: https://img.shields.io/github/license/ArmandPretorius/nudge.svg?style=flat-square
-[license-url]: https://github.com/ArmandPretorius/nudge/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/ArmandPretorius
 [product-screenshot]: nudge_screenshot.png
