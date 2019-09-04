@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.ColorFilter
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -15,20 +17,16 @@ import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
+import android.support.v7.widget.helper.ItemTouchHelper.Callback.makeMovementFlags
 import android.view.*
 import android.webkit.ConsoleMessage
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 
 import com.example.nudge.Model.ToDoItem
 import java.util.*
 
 import kotlinx.android.synthetic.main.activity_fullscreen.*
 import java.io.Console
-import android.widget.LinearLayout
-
 
 
 class FullscreenActivity : AppCompatActivity() {
@@ -134,20 +132,12 @@ class FullscreenActivity : AppCompatActivity() {
                 }
 
                 override fun onSwiped(p0: RecyclerView.ViewHolder, p1: Int) {
-                    val sourcePosition = p0.adapterPosition
-
-                    adapter?.notifyItemRemoved(sourcePosition)
-
-                    dbHandler?.deleteToDoItem(sourcePosition.toLong())
-
-
-
                 }
-
             })
 
         touchHelper?.attachToRecyclerView(rv_item)
     }
+
 
 //    fun updateItem(item: ToDoItem) {
 //        val dialog = AlertDialog.Builder(this)
@@ -214,7 +204,7 @@ class FullscreenActivity : AppCompatActivity() {
             }
 
             //MARK AS CHECkED
-            holder.move.setOnClickListener {
+            holder.nudgeItem.setOnClickListener {
                 list[p1].isCompleted = !list[p1].isCompleted
                 activity.dbHandler.updateToDoItem(list[p1])
 
@@ -230,18 +220,21 @@ class FullscreenActivity : AppCompatActivity() {
                 }
             }
 
-
             //DELETES ITEM
+            holder.delete.setOnTouchListener {v, event ->
 
-          holder.delete.setOnTouchListener { v, event ->
-              if(event.actionMasked == MotionEvent.ACTION_MOVE){
-                  activity.touchHelper?.startSwipe(holder)
-                      activity.dbHandler.deleteToDoItem(list[p1].id)
-                    //  activity.refreshList()
-              }
-              false
+                if(event.actionMasked == MotionEvent.ACTION_DOWN){
+                    activity.touchHelper?.startSwipe(holder)
+
+                    println(list[p1].id)
+                    println(list[p1].itemName)
+                    activity.dbHandler.deleteToDoItem(list[p1].id)
+                    activity.refreshList()
+
+
+                }
+                false
             }
-
 
 ////            holder.edit.setOnClickListener {
 ////                activity.updateItem(list[p1])
@@ -251,6 +244,7 @@ class FullscreenActivity : AppCompatActivity() {
             holder.move.setOnTouchListener { v, event ->
                 if(event.actionMasked== MotionEvent.ACTION_DOWN){
                     activity.touchHelper?.startDrag(holder)
+                    //holder.move.background.colorFilter = ColorFi
                 }
                 false
             }
@@ -264,6 +258,7 @@ class FullscreenActivity : AppCompatActivity() {
         //    val edit: ImageView = v.findViewById(R.id.iv_edit)
             val delete: CardView = v.findViewById(R.id.cb_background)
             val move: CardView = v.findViewById(R.id.cb_background)
+            val nudgeItem: Button = v.findViewById(R.id.nudgeId)
         }
     }
 

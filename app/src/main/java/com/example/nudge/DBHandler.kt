@@ -44,12 +44,12 @@ class DBHandler(val context: Context): SQLiteOpenHelper(context, DB_NAME, null, 
         cv.put(COL_TODO_ID, item.toDoId)
         cv.put(COL_IS_COLPLETED, item.isCompleted)
 
-        db.update(TABLE_TODO_ITEM, cv, "$COL_ID=?", arrayOf(item.id.toString()))
+        db.update(TABLE_TODO_ITEM, cv, "$COL_TODO_ID=?", arrayOf(item.id.toString()))
     }
 
     fun deleteToDoItem(itemId : Long){
         val db = writableDatabase
-        db.delete(TABLE_TODO_ITEM,"$COL_ID=?" , arrayOf(itemId.toString()))
+        db.delete(TABLE_TODO_ITEM,"$COL_TODO_ID=?" , arrayOf(itemId.toString()))
 
     }
 
