@@ -132,6 +132,8 @@ class FullscreenActivity : AppCompatActivity() {
                 }
 
                 override fun onSwiped(p0: RecyclerView.ViewHolder, p1: Int) {
+                    adapter?.notifyItemRemoved(p0.adapterPosition)
+
                 }
             })
 
@@ -223,17 +225,27 @@ class FullscreenActivity : AppCompatActivity() {
             //DELETES ITEM
             holder.delete.setOnTouchListener {v, event ->
 
-                if(event.actionMasked == MotionEvent.ACTION_DOWN){
+                if(event.actionMasked == MotionEvent.ACTION_MOVE){
                     activity.touchHelper?.startSwipe(holder)
 
                     println(list[p1].id)
                     println(list[p1].itemName)
-                    activity.dbHandler.deleteToDoItem(list[p1].id)
-                    activity.refreshList()
+                    val dialog = AlertDialog.Builder(activity)
+                    dialog.setTitle("Are you sure")
+                    dialog.setMessage("Do you want to delete this item ?")
+                    dialog.setPositiveButton("Continue") { _: DialogInterface, _: Int ->
+                        activity.dbHandler.deleteToDoItem(list[p1].id)
+                        activity.refreshList()
+                    }
+                    dialog.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
 
+                    }
+                    dialog.show()
 
                 }
                 false
+
+
             }
 
 ////            holder.edit.setOnClickListener {
