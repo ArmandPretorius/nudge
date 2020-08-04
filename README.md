@@ -1,10 +1,19 @@
 <!--Nudge README.MD-->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+-->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://github.com/ArmandPretorius/nudge">
-    <img src="nudges_logo.png" alt="Logo" height="80">
+    <img src="images/nudgelogo.png" alt="Nudges Logo" height="80">
   </a>
 
   <h3 align="center">Nudge</h3>
@@ -31,16 +40,18 @@
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
   * [Installation](#installation)
+* [Features](#features)
 * [Usage](#usage)
-  * [Logic](#logic)
-* [Changes](#changes)
+* [Logic](#logic)
+* [Contribution](#contribution)
+* [License](#license)
+* [Challenges](#challenges)
 * [Contact](#contact)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-
-<img src="nudge_screenshot.png" alt="Logo" width="180">
+<img src="images/intro.png" alt="Nudges introduction">
 
 Nudge is a Android to-do list application where you can create a simple list of anything you want to remember. Easily reorder the list, mark items as finished and delete items.
 
@@ -49,6 +60,7 @@ This Project is for my Term 3 elective, Native Android Development 303, for whic
 ### Built With
 This Android application was build using:
 * [Kotlin](https://kotlin.com)
+* [Android Studio](https://developer.android.com/studio)
 
 
 ### Installation
@@ -59,6 +71,10 @@ This Android application was build using:
 git clone https:://github.com/ArmandPretorius/nudge.git
 ```
 3. Then open the project in Android Studio
+
+## Features
+
+<img src="images/features.png" alt="Nudges features">
 
 <!-- USAGE -->
 ## Usage
@@ -78,8 +94,8 @@ If you have more than one nudge, you can long press on a nudge and drag it up an
 The application uses [SQLite](https://www.sqlite.org/index.html) to store the items on the device and populates the information into a RecycleView.
 
 
-<!-- Changes Made -->
-## Changes
+<!-- Challenges Made -->
+## Challenges
 
 * I wanted to include a timer function where you can select how long you think each nudge would take, then when you click on a nudge, the timer will start and then tell you when the time is up.
 
@@ -87,11 +103,29 @@ The application uses [SQLite](https://www.sqlite.org/index.html) to store the it
 * Also, I wanted to implement notifications, which shows you how many nudges you have left.
 * I'd also like to add a indication that there are no nudges.
 
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/YourAmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/YourAmazingFeature`)
+5. Open a Pull Request
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
 
 <!-- CONTACT -->
 ## Contact
 
-Armand Pretorius - 170045@virtualwindow.co.za
+Armand Pretorius - [@amplified_designs](https://www.instagram.com/amplified_designs/) - 170045@virtualwindow.co.za
 
 Project Link: [https://github.com/ArmandPretorius/nudge](https://github.com/ArmandPretorius/nudge)
 
@@ -103,3 +137,15 @@ Project Link: [https://github.com/ArmandPretorius/nudge](https://github.com/Arma
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [product-screenshot]: nudge_screenshot.png
+[contributors-shield]: https://img.shields.io/github/contributors/ArmandPretorius/nudge.svg?style=flat-square
+[contributors-url]: https://github.com/ArmandPretorius/nudge/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/ArmandPretorius/nudge.svg?style=flat-square
+[forks-url]: https://github.com/ArmandPretorius/nudge/network/members
+[stars-shield]: https://img.shields.io/github/stars/ArmandPretorius/nudge.svg?style=flat-square
+[stars-url]: https://github.com/ArmandPretorius/nudge/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ArmandPretorius/nudge.svg?style=flat-square
+[issues-url]: https://github.com/ArmandPretorius/nudge/issues
+[license-shield]: https://img.shields.io/github/license/ArmandPretorius/nudge.svg?style=flat-square
+[license-url]: https://github.com/ArmandPretorius/nudge/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/armand-pretorius-293b3a18a
